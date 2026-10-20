@@ -1,0 +1,83 @@
+{
+  "name": "genpark-agentic-commerce-vendor-lead-time-po-safety-stock-skill",
+  "version": "1.0.0",
+  "title": "Vendor Lead-Time Variability & Safety Stock Optimizer Skill",
+  "description": "Stochastic vendor lead-time variability modeling, stockout probability Monte Carlo simulation, dynamic safety stock buffer optimization, and automated purchase order reorder triggers. Built for GenPark (https://www.genpark.ai).",
+  "homepage": "https://www.genpark.ai",
+  "linkedin": "https://www.linkedin.com/company/92955550",
+  "category": "agentic-commerce",
+  "topics": [
+    "safety-stock",
+    "inventory-optimization",
+    "lead-time",
+    "reorder-point",
+    "supply-chain",
+    "agentic-commerce",
+    "model-context-protocol",
+    "genpark"
+  ],
+  "tools": [
+    {
+      "name": "calculate_dynamic_safety_stock",
+      "description": "Calculate statistical safety stock and continuous reorder point (ROP) based on supplier lead-time standard deviation and target service level (95%-99%).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "average_daily_demand": {
+            "type": "number"
+          },
+          "demand_standard_deviation": {
+            "type": "number"
+          },
+          "average_lead_time_days": {
+            "type": "number"
+          },
+          "lead_time_standard_deviation_days": {
+            "type": "number"
+          },
+          "desired_service_level_pct": {
+            "type": "number",
+            "description": "e.g. 95.0, 98.0, 99.0"
+          }
+        },
+        "required": [
+          "average_daily_demand",
+          "demand_standard_deviation",
+          "average_lead_time_days",
+          "lead_time_standard_deviation_days"
+        ]
+      }
+    },
+    {
+      "name": "evaluate_purchase_order_trigger",
+      "description": "Audit current on-hand and in-transit inventory against statistical reorder point, issuing automated PO triggers.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sku": {
+            "type": "string"
+          },
+          "current_on_hand_units": {
+            "type": "integer"
+          },
+          "incoming_in_transit_units": {
+            "type": "integer"
+          },
+          "reorder_point_units": {
+            "type": "integer"
+          },
+          "economic_order_quantity_units": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "sku",
+          "current_on_hand_units",
+          "incoming_in_transit_units",
+          "reorder_point_units",
+          "economic_order_quantity_units"
+        ]
+      }
+    }
+  ]
+}
